@@ -81,8 +81,8 @@
   --menu-border-color: #e8e8e8;
   --header-bg: #fff;
   --header-prime-color: #6f778e;
-  --header-border-color: #006282;
-  --custom-white: #dffbff;
+  --header-border-color: #008273;
+  --custom-white: #dfffef;
   --custom-black: #000;
   --bootstrap-card-border: #e8e8e8;
   --list-hover-focus-bg: #f5f6f7;
@@ -127,13 +127,13 @@
     43,
     43,
     48;
-  --menu-bg: #12222B;
+  --menu-bg: #122b24;
   --menu-border-color: rgba(255, 255, 255, 0.1);
   --menu-prime-color: rgb(255, 255, 255);
-  --header-bg: #12222B;
+  --header-bg: #122b26;
   --header-prime-color: rgb(255, 255, 255);
   --header-border-color: rgba(255, 255, 255, 0.1);
-  --custom-white: #12222B;
+  --custom-white: #122b26;
   --custom-black: #fff;
   --default-border: rgba(255, 255, 255, 0.1);
   --default-text-color: rgba(254, 254, 254, 0.8);
@@ -151,7 +151,7 @@
   --default-body-bg-color: rgb(var(--body-bg-rgb2));
   --text-muted: rgb(255, 255, 255);
   --input-border: rgba(255, 255, 255, 0.1);
-  --form-control-bg: #12222B;
+  --form-control-bg: #122b28;
   --gray-1: #110f0f;
   --gray-2: #17171c;
   --gray-3: #393946;
@@ -404,7 +404,7 @@
     20,
     20,
     20;
-  --custom-white: #12222B;
+  --custom-white: #122b24;
   --default-border: rgb(255, 255, 255, 0.1);
 }
 
@@ -1524,7 +1524,7 @@
 
 [data-header-styles=transparent][data-theme-mode=light] {
   --header-border-color: rgba(0, 0, 0, 0.07);
-  --header-bg: #12222B;
+  --header-bg: #122b28;
 }
 
 [data-header-styles=transparent][data-theme-mode=light] .app-header {
