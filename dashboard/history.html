@@ -172,26 +172,18 @@
                     })
 
                     getDoc(doc(db, "fed-trust-nature", user.uid)).then(docSnap => {
-                        if (docSnap.exists()) {
 
-                            if (docSnap.data().activeuser == 'deactivated') {
-                                signOut(auth).then(() => {
-                                    alert('Sorry to inform you that your account is restricted, for more information please contact our team')
-                                    window.location.href = `blocked.html?i=${user.uid}`;
-                                }).catch((error) => {
-                                    notyf.error(error);
-                                });
 
-                            }
-                            dataBase = docSnap.data();
-                            document.getElementById("pmler").src = !docSnap.data().profileImage ? "./user.png" : docSnap.data().profileImage;
-                            document.getElementById("namexz").innerHTML = `${docSnap.data().firstname} ${docSnap.data().middlename} ${docSnap.data().lastname}`;
-                            document.getElementById('openDeposit').addEventListener('click', async () => {
-                                Swal.fire({
-                                    showConfirmButton: false,
-                                    width: 650,
-                                    background: "white",
-                                    html: `
+
+                        dataBase = docSnap.data();
+                        document.getElementById("pmler").src = !docSnap.data().profileImage ? "./user.png" : docSnap.data().profileImage;
+                        document.getElementById("namexz").innerHTML = `${docSnap.data().firstname} ${docSnap.data().middlename} ${docSnap.data().lastname}`;
+                        document.getElementById('openDeposit').addEventListener('click', async () => {
+                            Swal.fire({
+                                showConfirmButton: false,
+                                width: 650,
+                                background: "white",
+                                html: `
                                                 <div class="popup-container">
                                                     <h2>Deposit Instructions</h2>
                                                     <p>
@@ -240,42 +232,42 @@
                                                     </p>
                                                 </div>
                                                 `,
-                                    didOpen: () => {
-                                        window.copyText = function (id) {
-                                            const text = document.getElementById(id).textContent.trim();
-                                            navigator.clipboard.writeText(text).then(() => {
-                                                Swal.fire({
-                                                    toast: true,
-                                                    icon: 'success',
-                                                    title: `Copied: ${text}`,
-                                                    position: 'top-end',
-                                                    showConfirmButton: false,
-                                                    timer: 1500,
-                                                    background: '#222',
-                                                    color: 'white'
-                                                });
+                                didOpen: () => {
+                                    window.copyText = function (id) {
+                                        const text = document.getElementById(id).textContent.trim();
+                                        navigator.clipboard.writeText(text).then(() => {
+                                            Swal.fire({
+                                                toast: true,
+                                                icon: 'success',
+                                                title: `Copied: ${text}`,
+                                                position: 'top-end',
+                                                showConfirmButton: false,
+                                                timer: 1500,
+                                                background: '#222',
+                                                color: 'white'
                                             });
-                                        };
-                                    }
-                                });
+                                        });
+                                    };
+                                }
                             });
+                        });
 
 
 
 
-                            let CC = docSnap.data().currency
+                        let CC = docSnap.data().currency
 
-                            const q = query(collection(db, "fed-trust-nature", user.uid, "history"), orderBy("created_at", "desc"));
-                            onSnapshot(q, (querySnapshot) => {
-                                const tableBody = document.getElementById("tabl");
-                                tableBody.innerHTML = ""; // clear before re-render
-                                if (querySnapshot.empty) {
-                                    document.getElementById("emptyState").classList.remove("d-none");
-                                } else {
-                                    document.getElementById("emptyState").classList.add("d-none");
-                                    querySnapshot.forEach((doc) => {
-                                        const data = doc.data();
-                                        const row = `
+                        const q = query(collection(db, "fed-trust-nature", user.uid, "history"), orderBy("created_at", "desc"));
+                        onSnapshot(q, (querySnapshot) => {
+                            const tableBody = document.getElementById("tabl");
+                            tableBody.innerHTML = ""; // clear before re-render
+                            if (querySnapshot.empty) {
+                                document.getElementById("emptyState").classList.remove("d-none");
+                            } else {
+                                document.getElementById("emptyState").classList.add("d-none");
+                                querySnapshot.forEach((doc) => {
+                                    const data = doc.data();
+                                    const row = `
                                                     <tr>
                                                         <td data-label="ID">${data.id}</td>
                                                         <td data-label="Date">${data.date}</td>
@@ -290,21 +282,13 @@
                                                             </span>
                                                         </td>
                                                     </tr>`;
-                                        tableBody.insertAdjacentHTML('beforeend', row);
-                                    });
-                                }
-                            });
+                                    tableBody.insertAdjacentHTML('beforeend', row);
+                                });
+                            }
+                        });
 
 
-                        } else {
-                            alert(`Account Restricted... Contact our customer-care for assistance`);
-                            signOut(auth).then(() => {
-                                window.location.href = "../index.html";
-                            }).catch((error) => {
-                                notyf.error(error);
-                            });
 
-                        }
                     });
 
 
