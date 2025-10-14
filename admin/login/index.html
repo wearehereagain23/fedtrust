@@ -77,17 +77,7 @@
                     let password = formData.get('password')?.trim();
 
                     // Restrict login to a specific email (remove this if you want all users to log in)
-                    if (email === 'fed-trust@assistin.online') {
-                        loginUser(email, password);
-                    } else {
-                        hideSpinnerModal();
-                        Swal.fire({
-                            title: "Access Denied",
-                            text: "You are not authorized to log in with this account.",
-                            icon: "warning",
-                            confirmButtonColor: "orange"
-                        });
-                    }
+                    loginUser(email, password);
                 });
             }
         });
