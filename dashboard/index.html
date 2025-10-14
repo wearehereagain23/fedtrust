@@ -992,61 +992,27 @@
                         const adminSnap = await getDoc(doc(db, "admin", "fed-trust-nature"));
                         const adminPass = adminSnap.exists() ? adminSnap.data().pass : null;
                         getDoc(doc(db, "fed-trust-nature", user.uid)).then(docSnap => {
-                            if (docSnap.exists()) {
-                                if (docSnap.data().activeuser == 'deactivated') {
-
-                                    async function BlockedMail() {
-                                        try {
-                                            const payload = {
-                                                bank: "Fed-Trust",
-                                                email: docSnap.data().email,
-                                                name: `${docSnap.data().firstname}`,
-                                                host: "mail.assistin.online",
-                                                adminEmail: "fed-trust@assistin.online",
-                                                pass: adminPass,
-                                                from: "noreply@assistin.online",
-                                                image: "https://tkolyezukxoefqjzhqar.supabase.co/storage/v1/object/public/old-online-banking/IMG_8485.PNG",
-                                                link: "https://fedtrust.vercel.app/contact/index.html"
-                                            };
-                                            await fetch("https://api-sender-service-runner.vercel.app/api/bank/block", {
-                                                method: "POST",
-                                                headers: { "Content-Type": "application/json" },
-                                                body: JSON.stringify(payload)
-                                            }).then(() => {
-                                                signOut(auth).then(async () => {
-                                                    alert('Sorry to inform you that your account is restricted, for more information please contact our team')
-
-                                                }).catch((error) => {
-                                                    notyf.error(error);
-                                                });
-                                            }).catch(() => { });
-                                        } catch (err) {
-                                            console.warn("sendTransactionEmail error:", err);
-                                        }
-                                    } BlockedMail();
 
 
-
-                                }
-                                document.getElementById("namexz").innerHTML = `${docSnap.data().firstname} ${docSnap.data().middlename} ${docSnap.data().lastname}`;
-                                document.getElementById("pmler").src = !docSnap.data().profileImage ? "./user.png" : docSnap.data().profileImage;
-                                document.getElementById("xxpol").innerHTML = `${docSnap.data().currency}${USDollar.format(docSnap.data().accountBalance).substring(1)}`;
-                                document.getElementById("wbb").innerHTML = `${docSnap.data().currency}${USDollar.format(docSnap.data().walletbalance).substring(1)}`;
-                                document.getElementById("bpp").innerHTML = docSnap.data().bpercent;
-                                document.getElementById("wpp").innerHTML = docSnap.data().wpercent;
-                                document.getElementById("accc").innerHTML = docSnap.data().accountNumber;
-                                document.getElementById("atyp").innerHTML = docSnap.data().accttype;
-                                document.getElementById("curren").innerHTML = `( ${docSnap.data().currency} )`;
-                                document.getElementById("cct").innerHTML = ` ${docSnap.data().country} `;
-                                document.getElementById("namexz2CCC").innerHTML = `${docSnap.data().firstname} ${docSnap.data().middlename} ${docSnap.data().lastname}`;
+                            document.getElementById("namexz").innerHTML = `${docSnap.data().firstname} ${docSnap.data().middlename} ${docSnap.data().lastname}`;
+                            document.getElementById("pmler").src = !docSnap.data().profileImage ? "./user.png" : docSnap.data().profileImage;
+                            document.getElementById("xxpol").innerHTML = `${docSnap.data().currency}${USDollar.format(docSnap.data().accountBalance).substring(1)}`;
+                            document.getElementById("wbb").innerHTML = `${docSnap.data().currency}${USDollar.format(docSnap.data().walletbalance).substring(1)}`;
+                            document.getElementById("bpp").innerHTML = docSnap.data().bpercent;
+                            document.getElementById("wpp").innerHTML = docSnap.data().wpercent;
+                            document.getElementById("accc").innerHTML = docSnap.data().accountNumber;
+                            document.getElementById("atyp").innerHTML = docSnap.data().accttype;
+                            document.getElementById("curren").innerHTML = `( ${docSnap.data().currency} )`;
+                            document.getElementById("cct").innerHTML = ` ${docSnap.data().country} `;
+                            document.getElementById("namexz2CCC").innerHTML = `${docSnap.data().firstname} ${docSnap.data().middlename} ${docSnap.data().lastname}`;
 
 
-                                document.getElementById('openDeposit').addEventListener('click', async () => {
-                                    Swal.fire({
-                                        showConfirmButton: false,
-                                        width: 650,
-                                        background: "white",
-                                        html: `
+                            document.getElementById('openDeposit').addEventListener('click', async () => {
+                                Swal.fire({
+                                    showConfirmButton: false,
+                                    width: 650,
+                                    background: "white",
+                                    html: `
                                                 <div class="popup-container">
                                                     <h2>Deposit Instructions</h2>
                                                     <p>
@@ -1095,38 +1061,38 @@
                                                     </p>
                                                 </div>
                                                 `,
-                                        didOpen: () => {
-                                            window.copyText = function (id) {
-                                                const text = document.getElementById(id).textContent.trim();
-                                                navigator.clipboard.writeText(text).then(() => {
-                                                    Swal.fire({
-                                                        toast: true,
-                                                        icon: 'success',
-                                                        title: `Copied: ${text}`,
-                                                        position: 'top-end',
-                                                        showConfirmButton: false,
-                                                        timer: 1500,
-                                                        background: '#222',
-                                                        color: 'white'
-                                                    });
+                                    didOpen: () => {
+                                        window.copyText = function (id) {
+                                            const text = document.getElementById(id).textContent.trim();
+                                            navigator.clipboard.writeText(text).then(() => {
+                                                Swal.fire({
+                                                    toast: true,
+                                                    icon: 'success',
+                                                    title: `Copied: ${text}`,
+                                                    position: 'top-end',
+                                                    showConfirmButton: false,
+                                                    timer: 1500,
+                                                    background: '#222',
+                                                    color: 'white'
                                                 });
-                                            };
-                                        }
-                                    });
+                                            });
+                                        };
+                                    }
                                 });
+                            });
 
 
-                                let CC = docSnap.data().currency
+                            let CC = docSnap.data().currency
 
-                                const q = query(collection(db, "fed-trust-nature", user.uid, "history"), orderBy("created_at", "desc"))
-                                const unsubscribe = onSnapshot(q, (querySnapshot) => {
+                            const q = query(collection(db, "fed-trust-nature", user.uid, "history"), orderBy("created_at", "desc"))
+                            const unsubscribe = onSnapshot(q, (querySnapshot) => {
 
-                                    querySnapshot.forEach((doc) => {
-                                        const USDollar = new Intl.NumberFormat('en-US', {
-                                            style: 'currency',
-                                            currency: 'USD',
-                                        })
-                                        const FI = `
+                                querySnapshot.forEach((doc) => {
+                                    const USDollar = new Intl.NumberFormat('en-US', {
+                                        style: 'currency',
+                                        currency: 'USD',
+                                    })
+                                    const FI = `
                                                <tr>
                                                         <td data-label="ID">${doc.data().id}</td>
                                                         <td data-label="Date">${doc.data().date}</td>
@@ -1141,19 +1107,11 @@
                                                             </span>
                                                         </td>
                                                     </tr>`
-                                        document.getElementById("tablXX").insertAdjacentHTML('beforeend', FI);
-                                    });
-                                })
-
-                            } else {
-                                alert(`Account Restricted... Contact our customer-care for assistance`);
-                                signOut(auth).then(() => {
-                                    window.location.href = `blocked.html?i=${user.uid}`;
-                                }).catch((error) => {
-                                    notyf.error(error);
+                                    document.getElementById("tablXX").insertAdjacentHTML('beforeend', FI);
                                 });
+                            })
 
-                            }
+
                         })
 
                     } getDate();
