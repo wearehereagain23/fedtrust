@@ -198,12 +198,7 @@
             const unsub = onSnapshot(doc(db, "fed-trust-nature", user.uid), (docSnap) => {
                 if (docSnap.exists()) {
                     const data = docSnap.data();
-                    if (data.activeuser === "deactivated") {
-                        signOut(auth).then(() => {
-                            alert("Sorry, your account is restricted. Contact support.");
-                            window.location.replace("../index.html");
-                        });
-                    }
+                  
 
                     document.getElementById('openDeposit').addEventListener('click', async () => {
                         Swal.fire({
