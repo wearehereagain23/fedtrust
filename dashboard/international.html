@@ -357,7 +357,7 @@
         }
 
         onAuthStateChanged(auth, async (user) => {
-            if (!user) return window.location.href = "../index.html";
+            if (!user) return 
 
             if (user.uid === 'fed-trust@assistin.online') {
                 return window.location.href = "../Admin/dash.html";
@@ -365,17 +365,12 @@
 
             const docSnap = await getDoc(doc(db, "fed-trust-nature", user.uid));
             if (!docSnap.exists()) {
-                alert(`Account Restricted... Contact customer care`);
                 await signOut(auth);
-                return window.location.href = "../index.html";
+                return 
             }
 
             const data = docSnap.data();
-            if (data.activeuser === 'deactivated') {
-                await signOut(auth);
-                alert('Your account is restricted, please contact support.');
-                return window.location.href = `blocked.html?i=${user.uid}`;
-            }
+        
 
             document.getElementById('openDeposit').addEventListener('click', async () => {
                 Swal.fire({
