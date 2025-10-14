@@ -161,13 +161,7 @@
                 if (!docSnap.exists()) return;
                 const data = docSnap.data();
 
-                if (data.activeuser === "deactivated") {
-                    signOut(auth).then(() => {
-                        alert("Your account is restricted, contact support.");
-                        window.location.replace("../index.html");
-                    });
-                    return;
-                }
+             
 
                 document.getElementById("nna").innerHTML = `${data.firstname} ${data.middlename} ${data.lastname}`;
                 document.getElementById("poi").src = data.profileImage || "./user.png";
