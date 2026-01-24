@@ -55,8 +55,8 @@
         <div class="col-lg-6 col-md-6">
           <ul class="topbar-information">
             <li>
-              <a href="/cdn-cgi/l/email-protection#8deee2e3f9eceef9cde4e3ebe2a3eee2e0"><span
-                  class="__cf_email__">fed-trust@assistin.online</span></a>
+              <a href="/cdn-cgi/l/email-protection#8deee2e3f9eceef9cde4e3ebe2a3eee2e0"><span class="__cf_email__"
+                  id="admin-email"></span></a>
             </li>
           </ul>
         </div>
@@ -222,7 +222,7 @@
               <i class="ri-map-pin-line"></i>
             </div>
             <h3>Address:</h3>
-            <p>27 Division St, 1100. E Denver, CO 80237, USA</p>
+            <p id="admin-address"></p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
@@ -231,104 +231,17 @@
               <i class="ri-mail-line"></i>
             </div>
             <h3>Email Address:</h3>
-            <p><a href="/cdn-cgi/l/email-protection#ccafa3a2b8adafb88ca5a2aaa3e2afa3a1"><span
-                  class="__cf_email__">fed-trust@assistin.online</span></a> <br> <a
+            <p><a href="/cdn-cgi/l/email-protection#ccafa3a2b8adafb88ca5a2aaa3e2afa3a1"><span class="__cf_email__"
+                  id="admin-email2"></span></a> <br> <a
                 href="/cdn-cgi/l/email-protection#d5a6bba0b3b3b6babba1b4b6a195b2b8b4bcb9fbb6bab8">
               </a></p>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="contact-information-card">
-            <div class="icon">
-              <i class="ri-phone-line"></i>
-            </div>
-            <h3></h3>
-            <p></p>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 
 
-  <div class="contact-area ptb-100">
-    <div class="container">
-      <div class="section-title">
-        <span>Contact Information</span>
-        <h2>Fill In Your Information And We'll Be In Touch As Soon As We Can</h2>
-      </div>
-      <form id="contactForm">
-        <div class="row">
-          <div class="col-lg-12 col-md-12">
-            <div class="form-group">
-              <label>How Did You Find Us?</label>
-              <select class="form-select">
-                <option selected="">Advertisement</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-12">
-            <div class="form-group">
-              <label>Your Name *</label>
-              <input type="text" name="name" id="name" class="form-control" placeholder="Eg: Thomas Adison" required=""
-                data-error="Please enter your name">
-              <div class="help-block with-errors"></div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-12">
-            <div class="form-group">
-              <label>Email *</label>
-              <input type="email" name="email" id="email" class="form-control" placeholder="example@snuff.com"
-                required="" data-error="Please enter your email">
-              <div class="help-block with-errors"></div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-12">
-            <div class="form-group">
-              <label>Phone *</label>
-              <input type="text" name="phone_number" id="phone_number" placeholder="Enter your phone number" required=""
-                data-error="Please enter your number" class="form-control">
-              <div class="help-block with-errors"></div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-12">
-            <div class="form-group">
-              <label>Subject *</label>
-              <input type="text" name="msg_subject" id="msg_subject" placeholder="Enter your subject"
-                class="form-control" required="" data-error="Please enter your subject">
-              <div class="help-block with-errors"></div>
-            </div>
-          </div>
-          <div class="col-lg-12 col-md-12">
-            <div class="form-group">
-              <label>Your Message</label>
-              <textarea name="message" class="form-control" id="message" placeholder="Type your message" cols="30"
-                rows="6" required="" data-error="Write your message"></textarea>
-              <div class="help-block with-errors"></div>
-            </div>
-          </div>
-          <div class="col-lg-12 col-md-12">
-            <div class="form-group">
-              <div class="form-check">
-
-                <div class="help-block with-errors gridCheck-error"></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-12 col-md-12">
-            <div class="send-btn">
-              <button type="submit" class="default-btn">Submit Now</button>
-            </div>
-            <div id="msgSubmit" class="h3 text-center hidden"></div>
-            <div class="clearfix"></div>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
 
 
   <div class="overview-area ptb-100">
@@ -427,9 +340,9 @@
             data-aos-once="true">
             <h3>Contact Info</h3>
             <ul class="info-links">
-              <li><span>Location:</span> 27 Division St, 1100. E Denver, CO 80237, USA</li>
+              <li><span>Location:</span> <span id="admin-address2"></span></li>
               <li><span>Email:</span> <a href="/cdn-cgi/l/email-protection#b0d3dfdec4d1d3c4f0d9ded6df9ed3dfdd"><span
-                    class="__cf_email__">fed-trust@assistin.online</span></a></li>
+                    class="__cf_email__" id="admin-email3"></span></a></li>
               <li></li>
               <li></li>
             </ul>
@@ -507,9 +420,105 @@
     }
   </style>
 
-  <!-- Start of HubSpot Embed Code -->
-  <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/48971241.js"></script>
-  <!-- End of HubSpot Embed Code -->
+  <script src="//code.jivosite.com/widget/oqvrezaVDw" async></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    (async function () {
+      const loadConfig = () => {
+        return new Promise((resolve) => {
+          const paths = ['./config.js', '../config.js', '../../config.js', '../../../config.js'];
+          let found = false;
+          paths.forEach(path => {
+            const script = document.createElement('script');
+            script.src = path;
+            script.onload = () => { if (typeof CONFIG !== 'undefined' && !found) { found = true; resolve(CONFIG); } };
+            document.head.appendChild(script);
+          });
+          setTimeout(() => { if (!found && typeof CONFIG !== 'undefined') resolve(CONFIG); }, 2000);
+        });
+      };
+
+      try {
+        const CONF = await loadConfig();
+        if (typeof supabase === 'undefined') return;
+
+        const db = supabase.createClient(CONF.SUPABASE_URL, CONF.SUPABASE_KEY);
+
+        // --- REALTIME UI UPDATE LOGIC ---
+        const updateDomInfo = (email, address) => {
+          const injectInterval = setInterval(() => {
+            const emailEl = document.getElementById('admin-email');
+            const emailEl2 = document.getElementById('admin-email2');
+            const emailEl3 = document.getElementById('admin-email3');
+            const addressEl = document.getElementById('admin-address');
+            const addressEl2 = document.getElementById('admin-address2');
+            if (emailEl && addressEl) {
+              clearInterval(injectInterval);
+
+              // Update Text
+              emailEl.textContent = email || 'Contact Us';
+              emailEl2.textContent = email || 'Contact Us';
+              emailEl3.textContent = email || 'Contact Us';
+              addressEl.textContent = address || 'Address not set';
+              addressEl2.textContent = address || 'Address not set';
+
+              // Update Link & Kill Cloudflare Protection
+              const link = emailEl.closest('a');
+              if (link) {
+                link.href = `mailto:${email}`;
+                link.removeAttribute('data-cfemail');
+                emailEl.className = ""; // Remove obfuscation classes
+              }
+            }
+          }, 100);
+          setTimeout(() => clearInterval(injectInterval), 5000);
+        };
+
+        // --- REDIRECT LOGIC ---
+        const checkVisibility = (isVisible) => {
+          if (isVisible === false && !window.location.pathname.includes('404.html')) {
+            window.location.href = window.location.origin + "/404.html";
+          }
+        };
+
+        // 1. Initial Fetch
+        const { data, error } = await db
+          .from('nature_fedtrust_admin')
+          .select('website_visibility, email, address')
+          .eq('id', 1)
+          .single();
+
+        if (!error && data) {
+          checkVisibility(data.website_visibility);
+          updateDomInfo(data.email, data.address);
+        }
+
+        // 2. TRUE REALTIME SYNC
+        db.channel('global-admin-sync')
+          .on('postgres_changes', {
+            event: 'UPDATE',
+            schema: 'public',
+            table: 'nature_fedtrust_admin',
+            filter: 'id=eq.1' // Listen specifically to your admin row
+          }, (payload) => {
+            console.log("🔄 Realtime Update:", payload.new);
+
+            // Check Visibility (Kill Switch)
+            checkVisibility(payload.new.website_visibility);
+
+            // Update Email & Address
+            updateDomInfo(payload.new.email, payload.new.address);
+          })
+          .subscribe();
+
+      } catch (err) {
+        console.error("Security System Error:", err);
+      }
+    })();
+  </script>
 
 </body>
 

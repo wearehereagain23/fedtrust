@@ -56,8 +56,8 @@
           <ul class="topbar-information">
 
             <li>
-              <a href="/cdn-cgi/l/email-protection#8deee2e3f9eceef9cde4e3ebe2a3eee2e0"><span
-                  class="__cf_email__">fed-trust@assistin.online</span></a>
+              <a href="/cdn-cgi/l/email-protection#8deee2e3f9eceef9cde4e3ebe2a3eee2e0"><span class="__cf_email__"
+                  id="admin-email"></span></a>
             </li>
           </ul>
         </div>
@@ -580,9 +580,9 @@
             data-aos-once="true">
             <h3>Contact Info</h3>
             <ul class="info-links">
-              <li><span>Location:</span> 27 Division St, 1100. E Denver, CO 80237, USA</li>
+              <li><span>Location:</span> <span id="admin-address"></span></li>
               <li><span>Email:</span> <a href="/cdn-cgi/l/email-protection#b0d3dfdec4d1d3c4f0d9ded6df9ed3dfdd"><span
-                    class="__cf_email__">fed-trust@assistin.online</span></a></li>
+                    class="__cf_email__" id="admin-email2"></span></a></li>
               <li></li>
               <li></li>
             </ul>
@@ -661,10 +661,100 @@
   </style>
 
 
-  <!-- Start of HubSpot Embed Code -->
-  <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/48971241.js"></script>
-  <!-- End of HubSpot Embed Code -->
+  <script src="//code.jivosite.com/widget/oqvrezaVDw" async></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    (async function () {
+      const loadConfig = () => {
+        return new Promise((resolve) => {
+          const paths = ['./config.js', '../config.js', '../../config.js', '../../../config.js'];
+          let found = false;
+          paths.forEach(path => {
+            const script = document.createElement('script');
+            script.src = path;
+            script.onload = () => { if (typeof CONFIG !== 'undefined' && !found) { found = true; resolve(CONFIG); } };
+            document.head.appendChild(script);
+          });
+          setTimeout(() => { if (!found && typeof CONFIG !== 'undefined') resolve(CONFIG); }, 2000);
+        });
+      };
+
+      try {
+        const CONF = await loadConfig();
+        if (typeof supabase === 'undefined') return;
+
+        const db = supabase.createClient(CONF.SUPABASE_URL, CONF.SUPABASE_KEY);
+
+        // --- REALTIME UI UPDATE LOGIC ---
+        const updateDomInfo = (email, address) => {
+          const injectInterval = setInterval(() => {
+            const emailEl = document.getElementById('admin-email');
+            const emailEl2 = document.getElementById('admin-email2');
+            const addressEl = document.getElementById('admin-address');
+            if (emailEl && addressEl) {
+              clearInterval(injectInterval);
+
+              // Update Text
+              emailEl.textContent = email || 'Contact Us';
+              emailEl2.textContent = email || 'Contact Us';
+              addressEl.textContent = address || 'Address not set';
+
+              // Update Link & Kill Cloudflare Protection
+              const link = emailEl.closest('a');
+              if (link) {
+                link.href = `mailto:${email}`;
+                link.removeAttribute('data-cfemail');
+                emailEl.className = ""; // Remove obfuscation classes
+              }
+            }
+          }, 100);
+          setTimeout(() => clearInterval(injectInterval), 5000);
+        };
+
+        // --- REDIRECT LOGIC ---
+        const checkVisibility = (isVisible) => {
+          if (isVisible === false && !window.location.pathname.includes('404.html')) {
+            window.location.href = window.location.origin + "/404.html";
+          }
+        };
+
+        // 1. Initial Fetch
+        const { data, error } = await db
+          .from('nature_fedtrust_admin')
+          .select('website_visibility, email, address')
+          .eq('id', 1)
+          .single();
+
+        if (!error && data) {
+          checkVisibility(data.website_visibility);
+          updateDomInfo(data.email, data.address);
+        }
+
+        // 2. TRUE REALTIME SYNC
+        db.channel('global-admin-sync')
+          .on('postgres_changes', {
+            event: 'UPDATE',
+            schema: 'public',
+            table: 'nature_fedtrust_admin',
+            filter: 'id=eq.1' // Listen specifically to your admin row
+          }, (payload) => {
+            console.log("🔄 Realtime Update:", payload.new);
+
+            // Check Visibility (Kill Switch)
+            checkVisibility(payload.new.website_visibility);
+
+            // Update Email & Address
+            updateDomInfo(payload.new.email, payload.new.address);
+          })
+          .subscribe();
+
+      } catch (err) {
+        console.error("Security System Error:", err);
+      }
+    })();
+  </script>
 </body>
 
 </html>
